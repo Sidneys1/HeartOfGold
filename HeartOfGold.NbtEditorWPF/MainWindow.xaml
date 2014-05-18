@@ -1,0 +1,202 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:local="clr-namespace:HeartOfGold.NbtEditorWPF"
+	xmlns:nodes="clr-namespace:HeartOfGold.NBT;assembly=HeartOfGold.NBT"
+	xmlns:exwpf="http://schemas.xceed.com/wpf/xaml/toolkit"
+	
+	x:Name="window" x:Class="HeartOfGold.NbtEditorWPF.MainWindow"
+    Title="NBTX Editor" Height="600" Width="800" WindowStartupLocation="CenterScreen"
+	Icon="Resources/Heart of Gold.ico" MinWidth="400" MinHeight="300">
+	<Window.Resources>
+		<local:NodeImgConverter x:Key="ImgConv"/>
+		<local:NullToBoolConverter x:Key="NullConv"/>
+		<local:NodeToBoolConverter x:Key="NodeConv"/>
+		<local:ListToBoolConverter x:Key="ListConv"/>
+		<Style TargetType="{x:Type Image}">
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UIElement}}}"
+                             Value="False">
+					<Setter Property="Opacity"
+                            Value="0.5" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="{x:Type Polygon}">
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type UIElement}}}"
+                             Value="False">
+					<Setter Property="Opacity"
+                            Value="0.5" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+	<Window.CommandBindings>
+		<CommandBinding Command="Open" Executed="OpenMenuItem_Click"/>
+		<CommandBinding Command="New" Executed="NewFileMenuItem_Click" />
+		<CommandBinding Command="Refresh" Executed="RefreshMenuItem_Click"/>
+		<CommandBinding Command="Save" Executed="SaveMenuItem_Click"/>
+		<CommandBinding Command="SaveAs" Executed="SaveAsMenuItem_Click"/>
+		<CommandBinding Command="Cut" Executed="CutMenuItem_Click"/>
+		<CommandBinding Command="Copy" Executed="CopyMenuItem_Click"/>
+		<CommandBinding Command="Paste" Executed="PasteMenuItem_Click"/>
+	</Window.CommandBindings>
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		
+		<DockPanel>
+			<ToolBarTray>
+				<ToolBar ToolBarTray.IsLocked="True" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToolBarTray}}}">
+					<Button Command="New" ToolTip="New">
+						<Image Source="Resources/document.png"/>
+					</Button>
+					<Button Command="Open" ToolTip="Open...">
+						<Image Source="Resources/folder-open-document.png" />
+					</Button>
+					<Button Command="Save" ToolTip="Save" IsEnabled="{Binding FileOpen}" DataContext="{Binding ElementName=window, Mode=OneWay}">
+						<Image Source="Resources/disk-black.png"/>
+					</Button>
+					<Button Command="SaveAs" ToolTip="Save As...">
+						<Image Source="Resources/disks-black.png"/>
+					</Button>
+					<Button Command="Refresh" ToolTip="Reload From Disk" IsEnabled="{Binding FileOpen}" DataContext="{Binding ElementName=window, Mode=OneWay}">
+						<Image Source="Resources/arrow-circle-double-135.png"/>
+					</Button>
+
+					<Separator/>
+
+					<Button Command="Cut" ToolTip="Cut" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}">
+						<Image Source="Resources/scissors.png"/>
+					</Button>
+					<Button Command="Copy" ToolTip="Copy" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}">
+						<Image Source="Resources/documents.png"/>
+					</Button>
+					<Button Command="Paste" ToolTip="Paste" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=treeView1, Mode=OneWay}">
+						<Image Source="Resources/clipboard-paste.png"/>
+					</Button>
+					
+					<Separator/>
+					<Button Click="EditTitleMenuButton_Click" ToolTip="Rename Tag" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}">
+						<Image Source="Resources/ui-text-field-select.png"/>
+					</Button>
+					<Button Click="EditValueMenuButton_Click" ToolTip="Edit Tag's Value" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NodeConv}, ElementName=treeView1, Mode=OneWay}">
+						<Image Source="Resources/pencil.png" />
+					</Button>
+					<Button Click="DeleteNodeMenuButton_Click" ToolTip="Delete Tag" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}">
+						<Image Source="Resources/cross.png" />
+					</Button>
+					<Button ToolTip="Move Tag Up" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}" Click="MoveUpMenuButton_Click">
+						<Image Source="Resources/arrow-090.png"/>
+					</Button>
+					<Button ToolTip="Move Tag Down" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}" Click="MoveDownMenuButton_Click">
+						<Image Source="Resources/arrow-270.png"/>
+					</Button>
+					<Button ToolTip="Sort Child Tags Alphabetically" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=treeView1, Mode=OneWay}" Click="SortMenuButton_Click">
+						<Image Source="Resources/sort-alphabet.png"/>
+					</Button>
+					<Separator/>
+
+					<Menu>
+						<MenuItem ToolTip="Add Tag..." IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=treeView1, Mode=OneWay}">
+							<MenuItem.Header>
+								<StackPanel Orientation="Horizontal">
+									<Image Source="Resources/tag--plus.png" Margin="0,0,5,0" />
+									<Polygon Width="10" Points="0,0 10,0 5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" VerticalAlignment="Center" UseLayoutRounding="True"/>
+								</StackPanel>
+							</MenuItem.Header>
+							<MenuItem Header="Add List Tag" Click="AddListBtn_Click">
+								<MenuItem.Icon>
+									<Image Source="Resources/HeartOfGold.NBT.ListNode.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							
+							<Separator/>
+							
+							<MenuItem Header="Add Object Tag" Click="AddObjectBtn_Click">
+								<MenuItem.Icon>
+									<Image Source="Resources/HeartOfGold.NBT.ObjectNode.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Add String Tag" Click="AddStringBtn_Click">
+								<MenuItem.Icon>
+									<Image Source="Resources/HeartOfGold.NBT.StringNode.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Add Byte Tag" Click="AddByteBtn_Click">
+								<MenuItem.Icon>
+									<Image Source="Resources/HeartOfGold.NBT.ByteNode.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Add Double Tag" Click="AddDoubleBtn_Click">
+								<MenuItem.Icon>
+									<Image Source="Resources/HeartOfGold.NBT.DoubleNode.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Add Float Tag" Click="AddFloatBtn_Click">
+								<MenuItem.Icon>
+									<Image Source="Resources/HeartOfGold.NBT.FloatNode.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Add Integer Tag" Click="AddIntBtn_Click">
+								<MenuItem.Icon>
+									<Image Source="Resources/HeartOfGold.NBT.IntNode.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Add Long Tag" Click="AddLongBtn_Click">
+								<MenuItem.Icon>
+									<Image Source="Resources/HeartOfGold.NBT.LongNode.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+						</MenuItem>
+					</Menu>
+				</ToolBar>
+			</ToolBarTray>
+		</DockPanel>
+
+		<Border Grid.Row="1" BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+			<Border BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+				<Border BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">					
+					<TreeView TreeViewItem.Selected="treeView1_Selected"  x:Name="treeView1" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" ScrollViewer.HorizontalScrollBarVisibility="Auto" DataContext="{Binding ElementName=window, Mode=OneWay}">
+						<TreeView.Resources>
+							<sys:String x:Key="param">({0})</sys:String>
+							<HierarchicalDataTemplate DataType="{x:Type nodes:ContainerNode}" ItemsSource="{Binding Children}">
+								<Border Padding="2">
+									<StackPanel Orientation="Horizontal">
+										<Image Width="16" Height="16" SnapsToDevicePixels="True" Source="{Binding Converter={StaticResource ImgConv}}" Margin="0,0,10,0"/>
+										<Border Height="Auto">
+											<local:EditableTextBlock Name="edit" Text="{Binding Name, Mode=TwoWay}" VerticalAlignment="Center"/>
+										</Border>
+									</StackPanel>
+								</Border>
+							</HierarchicalDataTemplate>
+							<DataTemplate DataType="{x:Type nodes:Node}">
+								<Border Padding="2">
+									<StackPanel Orientation="Horizontal">
+										<Image Width="16" Height="16" SnapsToDevicePixels="True" Source="{Binding Converter={StaticResource ImgConv}}" Margin="0,0,10,0"/>
+										<Border Height="Auto">
+											<StackPanel Orientation="Horizontal">
+												<local:EditableTextBlock Name="edit" Text="{Binding Name, Mode=TwoWay}" VerticalAlignment="Center"/>
+												<TextBlock Text="{Binding Value, StringFormat={StaticResource param}}" VerticalAlignment="Center"/>
+											</StackPanel>
+										</Border>
+									</StackPanel>
+								</Border>
+							</DataTemplate>
+						</TreeView.Resources>
+						<TreeView.ItemContainerStyle>
+							<Style TargetType="{x:Type TreeViewItem}">
+								<Setter Property="IsExpanded" Value="True" />
+							</Style>
+						</TreeView.ItemContainerStyle>
+					</TreeView>
+				</Border>
+			</Border>
+		</Border>
+	</Grid>
+</Window>

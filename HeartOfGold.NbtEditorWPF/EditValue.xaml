@@ -1,0 +1,46 @@
+﻿<Window x:Class="HeartOfGold.NbtEditorWPF.EditValue"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:node="clr-namespace:HeartOfGold.NBT;assembly=HeartOfGold.NBT"
+		xmlns:exwpf="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="Edit Value" Height="Auto" Width="Auto" WindowStyle="ToolWindow" ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight" MaxWidth="400">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*" MinWidth="100"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		<Border Margin="5,0,5,0" Height="20" VerticalAlignment="Center" >
+			<TextBlock Text="Edit Value:" VerticalAlignment="Center"/>
+		</Border>
+		<ContentPresenter Content="{Binding}" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,5,5,0">
+			<ContentPresenter.Resources>
+				<DataTemplate DataType="{x:Type node:ByteNode}">
+					<exwpf:IntegerUpDown Value="{Binding Value}" Minimum="0" Maximum="255" />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type node:DoubleNode}">
+					<exwpf:DoubleUpDown Value="{Binding Value}"/>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type node:FloatNode}">
+					<exwpf:DoubleUpDown Value="{Binding Value}"/>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type node:IntNode}">
+					<exwpf:IntegerUpDown Value="{Binding Value}"/>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type node:LongNode}">
+					<exwpf:LongUpDown Value="{Binding Value}"/>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type node:StringNode}">
+					<TextBox Text="{Binding Value}" TextWrapping="Wrap" AcceptsReturn="True"/>
+				</DataTemplate>
+			</ContentPresenter.Resources>
+		</ContentPresenter>
+
+		<Button Grid.Row="1" Grid.Column="1" Content="OK" IsDefault="True" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="3" MinWidth="50" Margin="5" Click="Button_Click_1"/>
+		<Button Grid.Row="1" Grid.Column="2" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="3" MinWidth="50" Margin="5" IsCancel="True" Click="Button_Click"/>
+	</Grid>
+</Window>
