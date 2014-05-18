@@ -7,8 +7,8 @@
     <ProjectGuid>{4E804A7B-1EED-4C54-8C5D-0869429ABB05}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HeartOfGold</RootNamespace>
-    <AssemblyName>HeartOfGold</AssemblyName>
+    <RootNamespace>HeartOfGold.GUI</RootNamespace>
+    <AssemblyName>HeartOfGold.GUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
