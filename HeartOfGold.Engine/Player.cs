@@ -23,7 +23,7 @@ namespace HeartOfGold.Engine
 		{
 			get
 			{
-				return Name.Contains(' ') ? Name.Substring(Name.IndexOf(' ')) : Name;
+				return Name.Contains(' ') ? Name.Substring(0, Name.IndexOf(' ')) : Name;	
 			}
 		}
 
