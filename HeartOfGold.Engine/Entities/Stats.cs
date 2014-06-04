@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HeartOfGold.Engine
+namespace HeartOfGold.Engine.Entities
 {
-	class Save
+	public struct Stats
 	{
+		public int Health;
+		public int MaxHealth;
+		public int Strength;
 	}
 }

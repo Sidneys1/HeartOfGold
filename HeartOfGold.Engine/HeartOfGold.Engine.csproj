@@ -41,13 +41,13 @@
   <ItemGroup>
     <Compile Include="Engine.cs" />
     <Compile Include="Entities\EntityBase.cs" />
+    <Compile Include="Entities\Stats.cs" />
     <Compile Include="Items\ItemBase.cs" />
     <Compile Include="Items\Weapon.cs" />
     <Compile Include="MapServices\Location.cs" />
     <Compile Include="MapServices\Map.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Save.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

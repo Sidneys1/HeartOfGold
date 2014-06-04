@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartOfGold.NbtEditorWPF", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartOfGold.GUI", "HeartOfGold.GUI\HeartOfGold.GUI.csproj", "{4E804A7B-1EED-4C54-8C5D-0869429ABB05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartOfGold.Engine", "HeartOfGold.Engine\HeartOfGold.Engine.csproj", "{C7ED89B8-CF45-415F-9982-F206A0F16B9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4E804A7B-1EED-4C54-8C5D-0869429ABB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E804A7B-1EED-4C54-8C5D-0869429ABB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E804A7B-1EED-4C54-8C5D-0869429ABB05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7ED89B8-CF45-415F-9982-F206A0F16B9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7ED89B8-CF45-415F-9982-F206A0F16B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7ED89B8-CF45-415F-9982-F206A0F16B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7ED89B8-CF45-415F-9982-F206A0F16B9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

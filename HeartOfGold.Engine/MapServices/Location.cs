@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace HeartOfGold.Engine.MapServices
 {
-	class Location
+	public struct Location
 	{
+		public int x;
+		public int y;
 	}
 }
