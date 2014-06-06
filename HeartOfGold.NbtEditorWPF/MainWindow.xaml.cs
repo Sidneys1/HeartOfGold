@@ -127,7 +127,7 @@ namespace HeartOfGold.NbtEditorWPF
 				b.Serialize(s, Root[0]);
 				s.Flush();
 				s.Close();
-				s.Dispose();
+				//s.Dispose();
 			}
 		}
 

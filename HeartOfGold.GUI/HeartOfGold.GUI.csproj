@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HeartOfGold.GUI</RootNamespace>
     <AssemblyName>HeartOfGold.GUI</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,13 +54,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HeartOfGold.NBT\HeartOfGold.NBT.csproj">
-      <Project>{8fdcd756-920c-4294-92a4-6984d7361e0c}</Project>
-      <Name>HeartOfGold.NBT</Name>
-    </ProjectReference>
+    <Content Include="Heart of Gold.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Heart of Gold.ico" />
+    <ProjectReference Include="..\HeartOfGold.Engine\HeartOfGold.Engine.csproj">
+      <Project>{c7ed89b8-cf45-415f-9982-f206a0f16b9b}</Project>
+      <Name>HeartOfGold.Engine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -29,12 +29,12 @@ namespace HeartOfGold.NbtEditorWPF
 
 			Context = context;
 			this.DataContext = context;
-			originalValue = context.GetType().GetProperty("Value").GetValue(context);
+			originalValue = context.GetType().GetProperty("Value").GetValue(context, null);
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			Context.GetType().GetProperty("Value").SetValue(Context, originalValue);
+			Context.GetType().GetProperty("Value").SetValue(Context, originalValue, null);
 			this.DialogResult = false;
 			this.Close();
 		}

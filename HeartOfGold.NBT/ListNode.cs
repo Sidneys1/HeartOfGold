@@ -39,11 +39,9 @@ namespace HeartOfGold.NBT
 			XmlReader r = XmlReader.Create(FromFile);
 			ListNode n = (NBT.ListNode)b.Deserialize(r);
 			r.Close();
-			r.Dispose();
+			//r.Dispose();
 			this.Children = n.Children;
 			this.Name = n.Name;
-			r.Close();
-			r.Dispose();
 		}
 
 
@@ -67,6 +65,9 @@ namespace HeartOfGold.NBT
 		}
 	}
 
+	/// <summary>
+	/// Represents a saved memory object or class.
+	/// </summary>
 	[Serializable()]
 	public class ObjectNode : ContainerNode
 	{
@@ -101,6 +102,11 @@ namespace HeartOfGold.NBT
 			{
 				return true;
 			}
+		}
+
+		public T FindChild<T>(string Name) where T:Node
+		{
+			return (T)Children.FirstOrDefault(o => o is T && o.Name == Name);
 		}
 	}
 }
