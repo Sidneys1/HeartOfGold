@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace HeartOfGold.Engine.Items
 {
-	class Weapon
+	public class Weapon : ItemBase
 	{
+		public Weapon(NBT.ObjectNode WeaponNode)
+		{
+			// TODO: Complete member initialization
+			throw new NotImplementedException();
+		}
 	}
 }
