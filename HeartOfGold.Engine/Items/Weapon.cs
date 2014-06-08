@@ -8,10 +8,14 @@ namespace HeartOfGold.Engine.Items
 {
 	public class Weapon : ItemBase
 	{
-		public Weapon(NBT.ObjectNode WeaponNode)
-		{
-			// TODO: Complete member initialization
-			throw new NotImplementedException();
-		}
+		[NBT.PropertyAttribute("Damage", typeof(NBT.IntNode))]
+		public int Damage { get; private set; }
+
+		//public Weapon(NBT.ObjectNode WeaponNode)
+		//{
+			
+		//}
+
+		public Weapon() { }
 	}
 }

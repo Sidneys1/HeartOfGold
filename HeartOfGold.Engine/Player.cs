@@ -16,6 +16,7 @@ namespace HeartOfGold.Engine
 		/// <summary>
 		/// What the player is known as. Usually shortened to the first name.
 		/// </summary>
+		[NBT.PropertyAttribute("Name", typeof(NBT.StringNode))]
 		public string Name { get; set; }
 
 		/// <summary>
@@ -32,11 +33,13 @@ namespace HeartOfGold.Engine
 		/// <summary>
 		/// The Player's Inventory, or the items they are carrying.
 		/// </summary>
+		[NBT.PropertyAttribute("Inventory", typeof(NBT.ListNode), typeof(Items.ItemBase), "HeartOfGold.Engine.Items.{0},HeartOfGold.Engine")]
 		public List<Items.ItemBase> Inventory { get; private set; }
 
 		/// <summary>
 		/// The Player's currently equipped Weapon, if any.
 		/// </summary>
+		[NBT.PropertyAttribute("Equipped Weapon", typeof(NBT.ObjectNode))]
 		public Items.Weapon EquippedWeapon { get; set; }
 
 		/// <summary>
@@ -54,11 +57,13 @@ namespace HeartOfGold.Engine
 		/// <summary>
 		/// Where the Player currently is.
 		/// </summary>
+		[NBT.PropertyAttribute("Location", typeof(NBT.ObjectNode))]
 		public MapServices.Location Location { get; set; }
 
 		/// <summary>
 		/// The Player's Statistics.
 		/// </summary>
+		[NBT.PropertyAttribute("Stats", typeof(NBT.ObjectNode))]
 		public Entities.Stats Stats { get; private set; } 
 
 		#endregion
@@ -110,7 +115,8 @@ namespace HeartOfGold.Engine
 				// Denotes no weapon, for now. Will be fists later.
 				EquippedWeapon = null;
 			else
-				EquippedWeapon = new Items.Weapon(WeaponNode);
+				EquippedWeapon = WeaponNode.Instantiate<Items.Weapon>();
+			//	EquippedWeapon = new Items.Weapon(WeaponNode);
 
 			#endregion
 
@@ -121,7 +127,7 @@ namespace HeartOfGold.Engine
 			if (LocationNode == null)
 				throw new FormatException("ObjectNode of type 'Player' did not contain expected ObjectNode 'Location'");
 			else
-				Location = new MapServices.Location(LocationNode);
+				Location = LocationNode.Instantiate<MapServices.Location>(); //new MapServices.Location(LocationNode);
 
 			#endregion
 
@@ -132,7 +138,7 @@ namespace HeartOfGold.Engine
 			if (StatsNode == null)
 				throw new FormatException("ObjectNode of type 'Player' did not contain expected ObjectNode 'Stats'");
 			else
-				Stats = new Entities.Stats(StatsNode);
+				Stats = StatsNode.Instantiate<Entities.Stats>(); //new Entities.Stats(StatsNode);
 
 			#endregion
 
@@ -158,7 +164,8 @@ namespace HeartOfGold.Engine
 						switch (CategoryNode.Value)
 						{
 							case "Weapon":
-								Inventory.Add(new Items.Weapon(ItemNode));
+								//Inventory.Add(new Items.Weapon(ItemNode));
+								Inventory.Add(ItemNode.Instantiate<Items.Weapon>());
 								break;
 
 							default:

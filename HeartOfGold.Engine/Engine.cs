@@ -46,7 +46,7 @@ namespace HeartOfGold.Engine
 			if (PlayerNode == null)
 				throw new FormatException("ListNode of type 'root' did not contain expected ObjectNode 'Player'");
 
-			Player = new Player(PlayerNode);
+			Player = PlayerNode.Instantiate<Player>(); //new Player(PlayerNode);
 
 			#endregion
 		}

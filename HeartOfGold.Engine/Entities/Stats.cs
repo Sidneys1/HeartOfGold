@@ -6,49 +6,57 @@ using System.Threading.Tasks;
 
 namespace HeartOfGold.Engine.Entities
 {
-	public struct Stats
+	public class Stats
 	{
-		public int Health;
-		public int MaxHealth;
-		public int Strength;
+		[NBT.PropertyAttribute("Health", typeof(NBT.IntNode))]
+		public int Health { get; set; }
 
-		public Stats(NBT.ObjectNode StatsNode)
-		{
-			if (StatsNode.Name != "Stats")
-				throw new FormatException("ObjectNode was not of format 'Stats'");
+		[NBT.PropertyAttribute("Max Health", typeof(NBT.IntNode))]
+		public int MaxHealth { get; set; }
 
-			#region Load Int Node "Health"
 
-			NBT.IntNode HealthNode = StatsNode.FindChild<NBT.IntNode>("Health");
+		[NBT.PropertyAttribute("Strength", typeof(NBT.IntNode))]
+		public int Strength { get; set; }
 
-			if (HealthNode == null)
-				throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'Health'");
-			else
-				Health = HealthNode.Value;
+		//public Stats(NBT.ObjectNode StatsNode)
+		//{
+		//	if (StatsNode.Name != "Stats")
+		//		throw new FormatException("ObjectNode was not of format 'Stats'");
 
-			#endregion
+		//	#region Load Int Node "Health"
 
-			#region Load Int Node "Max Health"
+		//	NBT.IntNode HealthNode = StatsNode.FindChild<NBT.IntNode>("Health");
 
-			NBT.IntNode MaxHealthNode = StatsNode.FindChild<NBT.IntNode>("Max Health");
+		//	if (HealthNode == null)
+		//		throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'Health'");
+		//	else
+		//		Health = HealthNode.Value;
 
-			if (MaxHealthNode == null)
-				throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'MaxHealth'");
-			else
-				MaxHealth = MaxHealthNode.Value;
+		//	#endregion
 
-			#endregion
+		//	#region Load Int Node "Max Health"
 
-			#region Load Int Node "Strength"
+		//	NBT.IntNode MaxHealthNode = StatsNode.FindChild<NBT.IntNode>("Max Health");
 
-			NBT.IntNode StrengthNode = StatsNode.FindChild<NBT.IntNode>("Strength");
+		//	if (MaxHealthNode == null)
+		//		throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'MaxHealth'");
+		//	else
+		//		MaxHealth = MaxHealthNode.Value;
 
-			if (StrengthNode == null)
-				throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'Strength'");
-			else
-				Strength = StrengthNode.Value;
+		//	#endregion
 
-			#endregion
-		}
+		//	#region Load Int Node "Strength"
+
+		//	NBT.IntNode StrengthNode = StatsNode.FindChild<NBT.IntNode>("Strength");
+
+		//	if (StrengthNode == null)
+		//		throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'Strength'");
+		//	else
+		//		Strength = StrengthNode.Value;
+
+		//	#endregion
+		//}
+
+		public Stats() { }
 	}
 }
