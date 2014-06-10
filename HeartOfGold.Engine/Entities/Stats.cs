@@ -6,56 +6,32 @@ using System.Threading.Tasks;
 
 namespace HeartOfGold.Engine.Entities
 {
+	/// <summary>
+	/// Describes an entity's base statistics
+	/// </summary>
 	public class Stats
 	{
-		[NBT.PropertyAttribute("Health", typeof(NBT.IntNode))]
+		#region Properties
+
+		/// <summary>
+		/// The amount of health an entity currently has.
+		/// </summary>
+		[NBT.NBTProperty("Health", typeof(NBT.IntNode))]
 		public int Health { get; set; }
 
-		[NBT.PropertyAttribute("Max Health", typeof(NBT.IntNode))]
+		/// <summary>
+		/// The maximum amount of health the entity can possibly have.
+		/// </summary>
+		[NBT.NBTProperty("Max Health", typeof(NBT.IntNode))]
 		public int MaxHealth { get; set; }
 
+		/// <summary>
+		/// The base damage this entity's attack inflicts.
+		/// </summary>
+		[NBT.NBTProperty("Strength", typeof(NBT.IntNode))]
+		public int Strength { get; set; } 
 
-		[NBT.PropertyAttribute("Strength", typeof(NBT.IntNode))]
-		public int Strength { get; set; }
-
-		//public Stats(NBT.ObjectNode StatsNode)
-		//{
-		//	if (StatsNode.Name != "Stats")
-		//		throw new FormatException("ObjectNode was not of format 'Stats'");
-
-		//	#region Load Int Node "Health"
-
-		//	NBT.IntNode HealthNode = StatsNode.FindChild<NBT.IntNode>("Health");
-
-		//	if (HealthNode == null)
-		//		throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'Health'");
-		//	else
-		//		Health = HealthNode.Value;
-
-		//	#endregion
-
-		//	#region Load Int Node "Max Health"
-
-		//	NBT.IntNode MaxHealthNode = StatsNode.FindChild<NBT.IntNode>("Max Health");
-
-		//	if (MaxHealthNode == null)
-		//		throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'MaxHealth'");
-		//	else
-		//		MaxHealth = MaxHealthNode.Value;
-
-		//	#endregion
-
-		//	#region Load Int Node "Strength"
-
-		//	NBT.IntNode StrengthNode = StatsNode.FindChild<NBT.IntNode>("Strength");
-
-		//	if (StrengthNode == null)
-		//		throw new FormatException("ObjectNode of type 'Stats' did not contain expected IntNode 'Strength'");
-		//	else
-		//		Strength = StrengthNode.Value;
-
-		//	#endregion
-		//}
+		#endregion
 
 		public Stats() { }
 	}

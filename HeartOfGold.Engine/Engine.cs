@@ -35,18 +35,20 @@ namespace HeartOfGold.Engine
 		{
 			NBT.ListNode root = new NBT.ListNode(location);
 
+			// Validation
 			if (root.Name != "root")
 				throw new FormatException("ListNode was not of format 'root'");
-
 
 			#region Load Object Node "Player"
 
 			NBT.ObjectNode PlayerNode = (NBT.ObjectNode)root.Children.FirstOrDefault(o => o is NBT.ObjectNode && o.Name == "Player");
 
+			// Validation
 			if (PlayerNode == null)
 				throw new FormatException("ListNode of type 'root' did not contain expected ObjectNode 'Player'");
 
-			Player = PlayerNode.Instantiate<Player>(); //new Player(PlayerNode);
+			// Let's create a player object directly from the ObjectNode!
+			Player = PlayerNode.Instantiate<Player>();
 
 			#endregion
 		}

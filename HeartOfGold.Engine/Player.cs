@@ -16,7 +16,7 @@ namespace HeartOfGold.Engine
 		/// <summary>
 		/// What the player is known as. Usually shortened to the first name.
 		/// </summary>
-		[NBT.PropertyAttribute("Name", typeof(NBT.StringNode))]
+		[NBT.NBTProperty("Name", typeof(NBT.StringNode))]
 		public string Name { get; set; }
 
 		/// <summary>
@@ -33,13 +33,13 @@ namespace HeartOfGold.Engine
 		/// <summary>
 		/// The Player's Inventory, or the items they are carrying.
 		/// </summary>
-		[NBT.PropertyAttribute("Inventory", typeof(NBT.ListNode), typeof(Items.ItemBase), "HeartOfGold.Engine.Items.{0},HeartOfGold.Engine")]
+		[NBT.NBTProperty("Inventory", typeof(NBT.ListNode), typeof(NBT.ObjectNode), "HeartOfGold.Engine.Items.{0},HeartOfGold.Engine", "Category")]
 		public List<Items.ItemBase> Inventory { get; private set; }
 
 		/// <summary>
 		/// The Player's currently equipped Weapon, if any.
 		/// </summary>
-		[NBT.PropertyAttribute("Equipped Weapon", typeof(NBT.ObjectNode))]
+		[NBT.NBTProperty("Equipped Weapon", typeof(NBT.ObjectNode))]
 		public Items.Weapon EquippedWeapon { get; set; }
 
 		/// <summary>
@@ -57,13 +57,13 @@ namespace HeartOfGold.Engine
 		/// <summary>
 		/// Where the Player currently is.
 		/// </summary>
-		[NBT.PropertyAttribute("Location", typeof(NBT.ObjectNode))]
+		[NBT.NBTProperty("Location", typeof(NBT.ObjectNode))]
 		public MapServices.Location Location { get; set; }
 
 		/// <summary>
 		/// The Player's Statistics.
 		/// </summary>
-		[NBT.PropertyAttribute("Stats", typeof(NBT.ObjectNode))]
+		[NBT.NBTProperty("Stats", typeof(NBT.ObjectNode))]
 		public Entities.Stats Stats { get; private set; } 
 
 		#endregion
@@ -79,104 +79,6 @@ namespace HeartOfGold.Engine
 			Inventory = new List<Items.ItemBase>();
 			Stats = new Entities.Stats();
 		}
-
-		/// <summary>
-		/// Instantiates a Player object from NBT
-		/// </summary>
-		/// <param name="savedNode">The ObjectNode parameter to instantiate from.</param>
-		public Player(NBT.ObjectNode savedNode)
-		{
-			// Initialize lists and Stats struct.
-			Inventory = new List<Items.ItemBase>();
-			Stats = new Entities.Stats();
-
-			// Insure the passed ObjectNode is actually a Player
-			if (savedNode.Name != "Player")
-				throw new FormatException("ObjectNode was not of format 'Player'");
-
-			#region Parse String Node "Name"
-
-			NBT.StringNode NameNode = savedNode.FindChild<NBT.StringNode>("Name");
-
-			if (NameNode == null)
-				throw new FormatException("ObjectNode of type 'Player' did not contain expected StringNode 'Name'");
-			else
-				Name = NameNode.Value; 
-
-			#endregion
-
-			#region Parse Object Node "Equipped Weapon"
-
-			NBT.ObjectNode WeaponNode = savedNode.FindChild<NBT.ObjectNode>("Equipped Weapon");
-
-			if (WeaponNode == null)
-				throw new FormatException("ObjectNode of type 'Player' did not contain expected ObjectNode 'Equipped Weapon'");
-			else if (WeaponNode.Children.Count == 0)
-				// Denotes no weapon, for now. Will be fists later.
-				EquippedWeapon = null;
-			else
-				EquippedWeapon = WeaponNode.Instantiate<Items.Weapon>();
-			//	EquippedWeapon = new Items.Weapon(WeaponNode);
-
-			#endregion
-
-			#region Parse Object Node "Location"
-
-			NBT.ObjectNode LocationNode = savedNode.FindChild<NBT.ObjectNode>("Location");
-
-			if (LocationNode == null)
-				throw new FormatException("ObjectNode of type 'Player' did not contain expected ObjectNode 'Location'");
-			else
-				Location = LocationNode.Instantiate<MapServices.Location>(); //new MapServices.Location(LocationNode);
-
-			#endregion
-
-			#region Parse Object Node "Stats"
-
-			NBT.ObjectNode StatsNode = savedNode.FindChild<NBT.ObjectNode>("Stats");
-
-			if (StatsNode == null)
-				throw new FormatException("ObjectNode of type 'Player' did not contain expected ObjectNode 'Stats'");
-			else
-				Stats = StatsNode.Instantiate<Entities.Stats>(); //new Entities.Stats(StatsNode);
-
-			#endregion
-
-			#region Parse List Node "Inventory"
-
-			NBT.ListNode InventoryNode = savedNode.FindChild<NBT.ListNode>("Inventory");
-
-			if (InventoryNode == null)
-				throw new FormatException("ObjectNode of type 'Player' did not contain expected ListNode 'Inventory'");
-			else
-			{
-				foreach (NBT.ObjectNode ItemNode in InventoryNode.Children)
-				{
-					if (ItemNode.Name != "Item")
-						throw new FormatException("'Player.Inventory' can only contain ObjectNodes of type 'Item'");
-					else
-					{
-						NBT.StringNode CategoryNode = ItemNode.FindChild<NBT.StringNode>("Category");
-
-						if (CategoryNode == null)
-							throw new FormatException("ObjectNode of type 'Item' did not contain expected StringNode 'Category'");
-
-						switch (CategoryNode.Value)
-						{
-							case "Weapon":
-								//Inventory.Add(new Items.Weapon(ItemNode));
-								Inventory.Add(ItemNode.Instantiate<Items.Weapon>());
-								break;
-
-							default:
-								throw new FormatException("ObjectNode of type 'Item' contained StringNode 'Category' with unexpected Value");
-						}
-					}
-				}
-			}
-
-			#endregion
-		} 
 
 		#endregion
 	}

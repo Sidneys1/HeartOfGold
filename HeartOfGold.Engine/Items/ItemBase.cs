@@ -6,19 +6,38 @@ using System.Threading.Tasks;
 
 namespace HeartOfGold.Engine.Items
 {
+	/// <summary>
+	/// Provides a base class for all inventory items.
+	/// </summary>
 	public class ItemBase
 	{
-		[NBT.PropertyAttribute("Category", typeof(NBT.StringNode))]
+		#region Properties
+
+		/// <summary>
+		/// The class-name of this item.
+		/// </summary>
+		[NBT.NBTProperty("Category", typeof(NBT.StringNode))]
 		public string Category { get; set; }
 
-		[NBT.PropertyAttribute("Description", typeof(NBT.StringNode))]
+		/// <summary>
+		/// A quick description of the item.
+		/// </summary>
+		[NBT.NBTProperty("Description", typeof(NBT.StringNode))]
 		public string Description { get; set; }
 
-		[NBT.PropertyAttribute("Name", typeof(NBT.StringNode))]
+		/// <summary>
+		/// The displayed name of this item.
+		/// </summary>
+		[NBT.NBTProperty("Name", typeof(NBT.StringNode))]
 		public string Name { get; set; }
 
-		[NBT.PropertyAttribute("Worth", typeof(NBT.DoubleNode))]
-		public double Worth { get; set; }
+		/// <summary>
+		/// The monetary worth of this item.
+		/// </summary>
+		[NBT.NBTProperty("Worth", typeof(NBT.DoubleNode))]
+		public double Worth { get; set; } 
+
+		#endregion
 
 		public override string ToString()
 		{

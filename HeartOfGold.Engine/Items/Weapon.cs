@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace HeartOfGold.Engine.Items
 {
+	/// <summary>
+	/// Describes a wieldable weapon.
+	/// </summary>
 	public class Weapon : ItemBase
 	{
-		[NBT.PropertyAttribute("Damage", typeof(NBT.IntNode))]
-		public int Damage { get; private set; }
+		#region Properties
 
-		//public Weapon(NBT.ObjectNode WeaponNode)
-		//{
-			
-		//}
+		/// <summary>
+		/// The base amount of damage this weapon can inflict.
+		/// </summary>
+		[NBT.NBTProperty("Damage", typeof(NBT.IntNode))]
+		public int Damage { get; private set; } 
+
+		#endregion
 
 		public Weapon() { }
 	}
