@@ -46,7 +46,7 @@ namespace HeartOfGold.NbtEditorWPF
 		{
 			InitializeComponent();
 			//this.DataContext = this;
-			Root = new ObservableCollection<ListNode>();
+			Root = new ObservableCollection<Node>();
 			treeView1.ItemsSource = Root;
 			ResetNodes();
 		}
@@ -67,8 +67,8 @@ namespace HeartOfGold.NbtEditorWPF
 			//treeView1.ItemsSource = Root;
 		}
 
-		private ObservableCollection<ListNode> _root;
-		public ObservableCollection<HeartOfGold.NBT.ListNode> Root
+		private ObservableCollection<Node> _root;
+		public ObservableCollection<HeartOfGold.NBT.Node> Root
 		{
 			get { return _root; }
 			set
@@ -110,8 +110,16 @@ namespace HeartOfGold.NbtEditorWPF
 
 		private void LoadFile()
 		{
-			ListNode rootNode = new ListNode(SaveLoc);
-
+			ContainerNode rootNode;
+			try
+			{
+				rootNode = ListNode.Deserialize(SaveLoc);
+			}
+			catch
+			{
+				rootNode = ObjectNode.Deserialize(SaveLoc);
+			}
+			
 			Root.Clear();
 			Root.Add(rootNode);
 		}
@@ -120,7 +128,7 @@ namespace HeartOfGold.NbtEditorWPF
 		{
 			if (Root.Count >= 1)
 			{
-				XmlSerializer b = new XmlSerializer(typeof(NBT.ListNode), "HeartOfGold.NBT");
+				XmlSerializer b = new XmlSerializer(Root[0].GetType(), "HeartOfGold.NBT");
 				XmlWriterSettings set = new XmlWriterSettings() { Indent = true, IndentChars = "\t", NewLineHandling = NewLineHandling.Replace, NewLineChars = Environment.NewLine };
 				XmlWriter s = XmlWriter.Create(SaveLoc, set);
 
@@ -233,7 +241,7 @@ namespace HeartOfGold.NbtEditorWPF
 		{
 			if (treeView1.SelectedItem != null && treeView1.SelectedItem != Root[0])
 			{
-				ContainerNode parent = Root[0];
+				ContainerNode parent = Root[0] as ContainerNode;
 
 				parent = FindParentNode(parent, treeView1.SelectedItem as Node);
 
@@ -242,7 +250,7 @@ namespace HeartOfGold.NbtEditorWPF
 				PropChanged("Root");
 
 				if (parent != Root[0])
-					SetSelectedItem(ref treeView1, Root[0], parent);
+					SetSelectedItem(ref treeView1, Root[0] as ContainerNode, parent);
 			}
 		}
 
@@ -288,7 +296,7 @@ namespace HeartOfGold.NbtEditorWPF
 		{
 			if (treeView1.SelectedItem != null && treeView1.SelectedItem != Root[0])
 			{
-				ContainerNode parent = Root[0];
+				ContainerNode parent = Root[0] as ContainerNode;
 
 				parent = FindParentNode(parent, treeView1.SelectedItem as Node);
 				Node n = (treeView1.SelectedItem as Node);
@@ -304,7 +312,7 @@ namespace HeartOfGold.NbtEditorWPF
 
 				PropChanged("Root");
 
-				SetSelectedItem(ref treeView1, Root[0], n);
+				SetSelectedItem(ref treeView1, Root[0] as ContainerNode, n);
 			}
 		}
 
@@ -312,7 +320,7 @@ namespace HeartOfGold.NbtEditorWPF
 		{
 			if (treeView1.SelectedItem != null && treeView1.SelectedItem != Root[0])
 			{
-				ContainerNode parent = Root[0];
+				ContainerNode parent = Root[0] as ContainerNode;
 
 				parent = FindParentNode(parent, treeView1.SelectedItem as Node);
 				Node n = (treeView1.SelectedItem as Node);
@@ -328,7 +336,7 @@ namespace HeartOfGold.NbtEditorWPF
 
 				PropChanged("Root");
 
-				SetSelectedItem(ref treeView1, Root[0], n);
+				SetSelectedItem(ref treeView1, Root[0] as ContainerNode, n);
 			}
 		}
 

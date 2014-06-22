@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HeartOfGold.Engine
+namespace HeartOfGold.Engine.Player
 {
 	/// <summary>
 	/// The Player of the game, and any information associated with them.
@@ -64,7 +64,7 @@ namespace HeartOfGold.Engine
 		/// The Player's Statistics.
 		/// </summary>
 		[NBT.NBTProperty("Stats", typeof(NBT.ObjectNode))]
-		public Entities.Stats Stats { get; private set; } 
+		public Entities.Stats Stats { get; private set; }
 
 		#endregion
 

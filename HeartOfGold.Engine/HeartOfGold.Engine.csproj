@@ -48,8 +48,8 @@
     <Compile Include="Items\ItemBase.cs" />
     <Compile Include="Items\Weapon.cs" />
     <Compile Include="MapServices\Location.cs" />
-    <Compile Include="MapServices\Map.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="MapServices\MapBase.cs" />
+    <Compile Include="Player\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

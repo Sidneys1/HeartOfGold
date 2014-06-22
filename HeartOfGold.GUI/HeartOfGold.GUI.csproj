@@ -63,6 +63,10 @@
       <Project>{c7ed89b8-cf45-415f-9982-f206a0f16b9b}</Project>
       <Name>HeartOfGold.Engine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HeartOfGold.NBT\HeartOfGold.NBT.csproj">
+      <Project>{8fdcd756-920c-4294-92a4-6984d7361e0c}</Project>
+      <Name>HeartOfGold.NBT</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

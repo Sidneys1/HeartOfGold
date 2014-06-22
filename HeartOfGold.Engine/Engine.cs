@@ -14,7 +14,8 @@ namespace HeartOfGold.Engine
 		/// <summary>
 		/// Represents the current human player.
 		/// </summary>
-		public Player Player { get; private set; }
+		[NBT.NBTProperty("Player", typeof(NBT.ObjectNode))]
+		public Player.Player Player { get; private set; }
 
 		///// <summary>
 		///// Represents locations.
@@ -33,7 +34,7 @@ namespace HeartOfGold.Engine
 		/// <param name="location">The path to saved file.</param>
 		public void LoadState(string location) 
 		{
-			NBT.ListNode root = new NBT.ListNode(location);
+			NBT.ListNode root = NBT.ListNode.Deserialize(location);
 
 			// Validation
 			if (root.Name != "root")
@@ -48,7 +49,7 @@ namespace HeartOfGold.Engine
 				throw new FormatException("ListNode of type 'root' did not contain expected ObjectNode 'Player'");
 
 			// Let's create a player object directly from the ObjectNode!
-			Player = PlayerNode.Instantiate<Player>();
+			Player = PlayerNode.Instantiate<Player.Player>();
 
 			#endregion
 		}

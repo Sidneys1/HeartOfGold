@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HeartOfGold.Engine.MapServices
 {
-	class Map
+	class MapBase
 	{
 	}
 }
