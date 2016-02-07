@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HeartOfGold.NBT;
 
 namespace HeartOfGold.Engine.MapServices
 {
@@ -16,18 +12,16 @@ namespace HeartOfGold.Engine.MapServices
 		/// <summary>
 		/// The X-coordinate
 		/// </summary>
-		[NBT.NBTProperty("X", typeof(NBT.IntNode))]
+		[NBTProperty("X", typeof(IntNode))]
 		public int X { get; set; }
 
 		/// <summary>
 		/// The Y-coordinate
 		/// </summary>
-		[NBT.NBTProperty("Y", typeof(NBT.IntNode))]
+		[NBTProperty("Y", typeof(IntNode))]
 		public int Y { get; set; } 
 
 		#endregion
-
-		public Location() { }
 
 		public override string ToString()
 		{

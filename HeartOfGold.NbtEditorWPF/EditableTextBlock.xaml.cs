@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace HeartOfGold.NbtEditorWPF
 {
-    public partial class EditableTextBlock : UserControl
+    public partial class EditableTextBlock
     {
 
         #region Constructor
@@ -23,8 +13,8 @@ namespace HeartOfGold.NbtEditorWPF
         public EditableTextBlock()
         {
             InitializeComponent();
-            base.Focusable = true;
-            base.FocusVisualStyle = null;
+            Focusable = true;
+            FocusVisualStyle = null;
         }
 
         #endregion Constructor
@@ -33,7 +23,7 @@ namespace HeartOfGold.NbtEditorWPF
 
         // We keep the old text when we go into editmode
         // in case the user aborts with the escape key
-        private string oldText;
+        private string _oldText;
 
         #endregion Member Variables
 
@@ -65,20 +55,12 @@ namespace HeartOfGold.NbtEditorWPF
 
         public bool IsInEditMode
         {
-            get 
+            get { return IsEditable && (bool) GetValue(IsInEditModeProperty); }
+	        set
             {
-                if (IsEditable)
-                    return (bool)GetValue(IsInEditModeProperty);
-                else
-                    return false;
-            }
-            set
-            {
-                if (IsEditable)
-                {
-                    if (value) oldText = Text;
-                    SetValue(IsInEditModeProperty, value);
-                }
+	            if (!IsEditable) return;
+	            if (value) _oldText = Text;
+	            SetValue(IsInEditModeProperty, value);
             }
         }
         public static readonly DependencyProperty IsInEditModeProperty =
@@ -116,18 +98,19 @@ namespace HeartOfGold.NbtEditorWPF
         // Invoked when we enter edit mode.
         void TextBox_Loaded(object sender, RoutedEventArgs e)
         {
-            TextBox txt = sender as TextBox;
+            var txt = sender as TextBox;
 
             // Give the TextBox input focus
-            txt.Focus();
+	        if (txt == null) return;
+	        txt.Focus();
 
-            txt.SelectAll();
+	        txt.SelectAll();
         }
 
         // Invoked when we exit edit mode.
         void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            this.IsInEditMode = false;
+            IsInEditMode = false;
         }
 
         // Invoked when the user edits the annotation.
@@ -135,13 +118,13 @@ namespace HeartOfGold.NbtEditorWPF
         {
             if (e.Key == Key.Enter)
             {
-                this.IsInEditMode = false;
+                IsInEditMode = false;
                 e.Handled = true;
             }
             else if (e.Key == Key.Escape)
             {
-                this.IsInEditMode = false;
-                Text = oldText;
+                IsInEditMode = false;
+                Text = _oldText;
                 e.Handled = true;
             }
         }

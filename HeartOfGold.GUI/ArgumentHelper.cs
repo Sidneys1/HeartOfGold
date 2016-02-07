@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace HeartOfGold.GUI
 {
@@ -12,11 +10,11 @@ namespace HeartOfGold.GUI
 		{
 			if (args.Length > 0)
 			{
-				List<ArgumentPair> returnValue = new List<ArgumentPair>();
+				var returnValue = new List<ArgumentPair>();
 				ArgumentPair current = null;
-				StringBuilder data = new StringBuilder();
+				var data = new StringBuilder();
 
-				foreach (string str in args)
+				foreach (var str in args)
 				{
 					 if (str[0] == '/')
 					 {
@@ -25,17 +23,16 @@ namespace HeartOfGold.GUI
 							 current.Data = data.ToString();
 							 returnValue.Add(current);
 							 data.Clear();
-							 current = null;
 						 }
 
-						 current = new ArgumentPair() { Flag = str.Substring(1) };
+						 current = new ArgumentPair { Flag = str.Substring(1) };
 					 }
 					 else
 					 {
 						 if (current != null)
 							 data.Append(string.Format((data.Length > 0 ? " {0}" : "{0}"), str));
 						 else
-							 throw new System.Data.SyntaxErrorException(string.Format("Token '{0}' found without flag.", str));
+							 throw new SyntaxErrorException(string.Format("Token '{0}' found without flag.", str));
 					 }
 				}
 

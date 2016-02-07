@@ -4,9 +4,8 @@
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:local="clr-namespace:HeartOfGold.NbtEditorWPF"
 	xmlns:nodes="clr-namespace:HeartOfGold.NBT;assembly=HeartOfGold.NBT"
-	xmlns:exwpf="http://schemas.xceed.com/wpf/xaml/toolkit"
-	
-	x:Name="window" x:Class="HeartOfGold.NbtEditorWPF.MainWindow"
+
+	x:Name="Window" x:Class="HeartOfGold.NbtEditorWPF.MainWindow"
     Title="NBTX Editor" Height="600" Width="800" WindowStartupLocation="CenterScreen"
 	Icon="Resources/Heart of Gold.ico" MinWidth="400" MinHeight="300">
 	<Window.Resources>
@@ -59,51 +58,51 @@
 					<Button Command="Open" ToolTip="Open...">
 						<Image Source="Resources/folder-open-document.png" />
 					</Button>
-					<Button Command="Save" ToolTip="Save" IsEnabled="{Binding FileOpen}" DataContext="{Binding ElementName=window, Mode=OneWay}">
+					<Button Command="Save" ToolTip="Save" IsEnabled="{Binding FileOpen}" DataContext="{Binding ElementName=Window, Mode=OneWay}">
 						<Image Source="Resources/disk-black.png"/>
 					</Button>
 					<Button Command="SaveAs" ToolTip="Save As...">
 						<Image Source="Resources/disks-black.png"/>
 					</Button>
-					<Button Command="Refresh" ToolTip="Reload From Disk" IsEnabled="{Binding FileOpen}" DataContext="{Binding ElementName=window, Mode=OneWay}">
+					<Button Command="Refresh" ToolTip="Reload From Disk" IsEnabled="{Binding FileOpen}" DataContext="{Binding ElementName=Window, Mode=OneWay}">
 						<Image Source="Resources/arrow-circle-double-135.png"/>
 					</Button>
 
 					<Separator/>
 
-					<Button Command="Cut" ToolTip="Cut" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}">
+					<Button Command="Cut" ToolTip="Cut" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=TreeView1, Mode=OneWay}">
 						<Image Source="Resources/scissors.png"/>
 					</Button>
-					<Button Command="Copy" ToolTip="Copy" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}">
+					<Button Command="Copy" ToolTip="Copy" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=TreeView1, Mode=OneWay}">
 						<Image Source="Resources/documents.png"/>
 					</Button>
-					<Button Command="Paste" ToolTip="Paste" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=treeView1, Mode=OneWay}">
+					<Button Command="Paste" ToolTip="Paste" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=TreeView1, Mode=OneWay}">
 						<Image Source="Resources/clipboard-paste.png"/>
 					</Button>
 					
 					<Separator/>
-					<Button Click="EditTitleMenuButton_Click" ToolTip="Rename Tag" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}">
+					<Button Click="EditTitleMenuButton_Click" ToolTip="Rename Tag" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=TreeView1, Mode=OneWay}">
 						<Image Source="Resources/ui-text-field-select.png"/>
 					</Button>
-					<Button Click="EditValueMenuButton_Click" ToolTip="Edit Tag's Value" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NodeConv}, ElementName=treeView1, Mode=OneWay}">
+					<Button Click="EditValueMenuButton_Click" ToolTip="Edit Tag's Value" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NodeConv}, ElementName=TreeView1, Mode=OneWay}">
 						<Image Source="Resources/pencil.png" />
 					</Button>
-					<Button Click="DeleteNodeMenuButton_Click" ToolTip="Delete Tag" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}">
+					<Button Click="DeleteNodeMenuButton_Click" ToolTip="Delete Tag" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=TreeView1, Mode=OneWay}">
 						<Image Source="Resources/cross.png" />
 					</Button>
-					<Button ToolTip="Move Tag Up" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}" Click="MoveUpMenuButton_Click">
+					<Button ToolTip="Move Tag Up" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=TreeView1, Mode=OneWay}" Click="MoveUpMenuButton_Click">
 						<Image Source="Resources/arrow-090.png"/>
 					</Button>
-					<Button ToolTip="Move Tag Down" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=treeView1, Mode=OneWay}" Click="MoveDownMenuButton_Click">
+					<Button ToolTip="Move Tag Down" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource NullConv}, ElementName=TreeView1, Mode=OneWay}" Click="MoveDownMenuButton_Click">
 						<Image Source="Resources/arrow-270.png"/>
 					</Button>
-					<Button ToolTip="Sort Child Tags Alphabetically" DataContext="{Binding ElementName=window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=treeView1, Mode=OneWay}" Click="SortMenuButton_Click">
+					<Button ToolTip="Sort Child Tags Alphabetically" DataContext="{Binding ElementName=Window, Mode=OneWay}" IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=TreeView1, Mode=OneWay}" Click="SortMenuButton_Click">
 						<Image Source="Resources/sort-alphabet.png"/>
 					</Button>
 					<Separator/>
 
 					<Menu>
-						<MenuItem ToolTip="Add Tag..." IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=treeView1, Mode=OneWay}">
+						<MenuItem ToolTip="Add Tag..." IsEnabled="{Binding SelectedItem, Converter={StaticResource ListConv}, ElementName=TreeView1, Mode=OneWay}">
 							<MenuItem.Header>
 								<StackPanel Orientation="Horizontal">
 									<Image Source="Resources/tag--plus.png" Margin="0,0,5,0" />
@@ -162,9 +161,9 @@
 		<Border Grid.Row="1" BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
 			<Border BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
 				<Border BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">					
-					<TreeView TreeViewItem.Selected="treeView1_Selected"  x:Name="treeView1" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" ScrollViewer.HorizontalScrollBarVisibility="Auto" DataContext="{Binding ElementName=window, Mode=OneWay}">
+					<TreeView TreeViewItem.Selected="treeView1_Selected"  x:Name="TreeView1" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" ScrollViewer.HorizontalScrollBarVisibility="Auto" DataContext="{Binding ElementName=Window, Mode=OneWay}">
 						<TreeView.Resources>
-							<sys:String x:Key="param">({0})</sys:String>
+							<sys:String x:Key="Param">({0})</sys:String>
 							<HierarchicalDataTemplate DataType="{x:Type nodes:ContainerNode}" ItemsSource="{Binding Children}">
 								<Border Padding="2">
 									<StackPanel Orientation="Horizontal">
@@ -182,7 +181,8 @@
 										<Border Height="Auto">
 											<StackPanel Orientation="Horizontal">
 												<local:EditableTextBlock Name="edit" Text="{Binding Name, Mode=TwoWay}" VerticalAlignment="Center"/>
-												<TextBlock Text="{Binding Value, StringFormat={StaticResource param}}" VerticalAlignment="Center"/>
+												<!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+												<TextBlock Text="{Binding Value, StringFormat={StaticResource Param}}" VerticalAlignment="Center"/>
 											</StackPanel>
 										</Border>
 									</StackPanel>

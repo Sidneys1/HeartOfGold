@@ -50,7 +50,9 @@
     <Compile Include="MapServices\Location.cs" />
     <Compile Include="MapServices\MapBase.cs" />
     <Compile Include="Player\Player.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registry\VariableRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HeartOfGold.NBT\HeartOfGold.NBT.csproj">

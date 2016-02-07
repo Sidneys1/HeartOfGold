@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using ProtoBuf;
 
 namespace HeartOfGold.NBT
 {
@@ -10,15 +12,17 @@ namespace HeartOfGold.NBT
 	[XmlRoot("Node", Namespace = "HeartOfGold.NBT")]
 	[XmlInclude(typeof(ListNode)), XmlInclude(typeof(ByteNode)), XmlInclude(typeof(StringNode)), XmlInclude(typeof(IntNode)),
 	XmlInclude(typeof(FloatNode)), XmlInclude(typeof(DoubleNode)), XmlInclude(typeof(LongNode)), XmlInclude(typeof(ObjectNode))]
-	[Serializable()]
+	[ProtoInclude(2, typeof(ContainerNode)), ProtoInclude(3, typeof(ByteNode)), ProtoInclude(4, typeof(StringNode)), ProtoInclude(5, typeof(IntNode)),
+	ProtoInclude(6, typeof(FloatNode)), ProtoInclude(7, typeof(DoubleNode)), ProtoInclude(8, typeof(LongNode))]
+	[Serializable, ProtoContract]
     public abstract class Node : INotifyPropertyChanged
     {
-		string _name = string.Empty;
+		private string _name = string.Empty;
 
 		/// <summary>
 		/// The name of this Node. Can represent type, a named value, or a description.
 		/// </summary>
-		[XmlAttribute("Name")]
+		[XmlAttribute("Name"), ProtoMember(1)]
 		public string Name 
 		{
 			get
@@ -35,23 +39,24 @@ namespace HeartOfGold.NBT
 		/// <summary>
 		/// True if this is a value-type node
 		/// </summary>
-		public virtual bool HasValue { get { return true; } }
+		[IgnoreDataMember]
+		public virtual bool HasValue => true;
 
 		/// <summary>
 		/// True if this is a root-type node.
 		/// </summary>
-		public virtual bool CanHaveChildren { get { return false; } }
+		[IgnoreDataMember]
+		public virtual bool CanHaveChildren => false;
 
 		#region INotifyPropertyChanged Stuff
 
 		/// <summary>
 		/// Notify any data-bound UIs that this object has updated a property.
 		/// </summary>
-		/// <param name="PropName"></param>
-		protected void PropChanged(string PropName)
+		/// <param name="propName"></param>
+		protected void PropChanged(string propName)
 		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(PropName));
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
 		}
 
 		[field: NonSerialized]

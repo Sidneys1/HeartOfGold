@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HeartOfGold.NBT;
 
 namespace HeartOfGold.Engine.Items
 {
@@ -16,25 +12,25 @@ namespace HeartOfGold.Engine.Items
 		/// <summary>
 		/// The class-name of this item.
 		/// </summary>
-		[NBT.NBTProperty("Category", typeof(NBT.StringNode))]
+		[NBTProperty("Category", typeof(StringNode))]
 		public string Category { get; set; }
 
 		/// <summary>
 		/// A quick description of the item.
 		/// </summary>
-		[NBT.NBTProperty("Description", typeof(NBT.StringNode))]
+		[NBTProperty("Description", typeof(StringNode))]
 		public string Description { get; set; }
 
 		/// <summary>
 		/// The displayed name of this item.
 		/// </summary>
-		[NBT.NBTProperty("Name", typeof(NBT.StringNode))]
+		[NBTProperty("Name", typeof(StringNode))]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// The monetary worth of this item.
 		/// </summary>
-		[NBT.NBTProperty("Worth", typeof(NBT.DoubleNode))]
+		[NBTProperty("Worth", typeof(DoubleNode))]
 		public double Worth { get; set; } 
 
 		#endregion

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HeartOfGold.NBT;
 
 namespace HeartOfGold.Engine
 {
@@ -14,7 +12,7 @@ namespace HeartOfGold.Engine
 		/// <summary>
 		/// Represents the current human player.
 		/// </summary>
-		[NBT.NBTProperty("Player", typeof(NBT.ObjectNode))]
+		[NBTProperty("Player", typeof(ObjectNode))]
 		public Player.Player Player { get; private set; }
 
 		///// <summary>
@@ -34,7 +32,7 @@ namespace HeartOfGold.Engine
 		/// <param name="location">The path to saved file.</param>
 		public void LoadState(string location) 
 		{
-			NBT.ListNode root = NBT.ListNode.Deserialize(location);
+			var root = ListNode.Deserialize(location);
 
 			// Validation
 			if (root.Name != "root")
@@ -42,14 +40,14 @@ namespace HeartOfGold.Engine
 
 			#region Load Object Node "Player"
 
-			NBT.ObjectNode PlayerNode = (NBT.ObjectNode)root.Children.FirstOrDefault(o => o is NBT.ObjectNode && o.Name == "Player");
+			var playerNode = (ObjectNode)root.Children.FirstOrDefault(o => o is ObjectNode && o.Name == "Player");
 
 			// Validation
-			if (PlayerNode == null)
+			if (playerNode == null)
 				throw new FormatException("ListNode of type 'root' did not contain expected ObjectNode 'Player'");
 
 			// Let's create a player object directly from the ObjectNode!
-			Player = PlayerNode.Instantiate<Player.Player>();
+			Player = playerNode.Instantiate<Player.Player>();
 
 			#endregion
 		}

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HeartOfGold.NBT;
 
 namespace HeartOfGold.Engine.Entities
 {
@@ -16,23 +12,21 @@ namespace HeartOfGold.Engine.Entities
 		/// <summary>
 		/// The amount of health an entity currently has.
 		/// </summary>
-		[NBT.NBTProperty("Health", typeof(NBT.IntNode))]
+		[NBTProperty("Health", typeof(IntNode))]
 		public int Health { get; set; }
 
 		/// <summary>
 		/// The maximum amount of health the entity can possibly have.
 		/// </summary>
-		[NBT.NBTProperty("Max Health", typeof(NBT.IntNode))]
+		[NBTProperty("Max Health", typeof(IntNode))]
 		public int MaxHealth { get; set; }
 
 		/// <summary>
 		/// The base damage this entity's attack inflicts.
 		/// </summary>
-		[NBT.NBTProperty("Strength", typeof(NBT.IntNode))]
+		[NBTProperty("Strength", typeof(IntNode))]
 		public int Strength { get; set; } 
 
 		#endregion
-
-		public Stats() { }
 	}
 }

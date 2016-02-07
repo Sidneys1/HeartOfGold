@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace HeartOfGold.NBT
 {
@@ -10,7 +6,7 @@ namespace HeartOfGold.NBT
 	/// An attribute used to identify NBT-backed properties.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property)]
-	public class NBTProperty : System.Attribute
+	public class NBTProperty : Attribute
 	{
 		/// <summary>
 		/// The name of this property in Tag form.
@@ -55,11 +51,11 @@ namespace HeartOfGold.NBT
 		/// <param name="childClassPathTag">The expected tag-path of the exact type within the child ObjectNode. (For ListNodes with ObjectNode children only. e.g. "Category")</param>
 		public NBTProperty(string name, Type type, Type childType = null, string formatChildClassPath = null, string childClassPathTag = null)
 		{
-			this.Name = name;
-			this.Type = type;
-			this.ChildType = childType;
-			this.FormatChildClassPath = formatChildClassPath;
-			this.ChildClassPathTag = childClassPathTag;
+			Name = name;
+			Type = type;
+			ChildType = childType;
+			FormatChildClassPath = formatChildClassPath;
+			ChildClassPathTag = childClassPathTag;
 		}
 	}
 }

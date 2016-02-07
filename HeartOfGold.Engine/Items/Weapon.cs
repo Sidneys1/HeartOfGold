@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HeartOfGold.NBT;
 
 namespace HeartOfGold.Engine.Items
 {
@@ -16,11 +12,10 @@ namespace HeartOfGold.Engine.Items
 		/// <summary>
 		/// The base amount of damage this weapon can inflict.
 		/// </summary>
-		[NBT.NBTProperty("Damage", typeof(NBT.IntNode))]
+		[NBTProperty("Damage", typeof(IntNode))]
+// ReSharper disable once UnusedAutoPropertyAccessor.Local
 		public int Damage { get; private set; } 
 
 		#endregion
-
-		public Weapon() { }
 	}
 }

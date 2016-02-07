@@ -4,7 +4,10 @@
 # User-specific files
 *.suo
 *.user
-*.sln.docstates
+*.sln.ide/
+*.sln.*
+packages/
+*.sublime-workspace
 
 # Build results
 
