@@ -45,6 +45,7 @@
     <Compile Include="GameWindow.cs" />
     <Compile Include="Helpers\Collections\CircularArray.cs" />
     <Compile Include="Helpers\Collections\MovingAverage.cs" />
+    <Compile Include="Helpers\Simplex.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

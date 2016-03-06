@@ -22,6 +22,8 @@ namespace HeartOfGold.MonoGame.Helpers.Collections {
 			}
 		}
 
+		public int Length => IsFilled ? BaseArray.Length : _head+1;
+
 		public T[] BaseArray { get; }
 
 		public bool IsFilled { get; private set; }
