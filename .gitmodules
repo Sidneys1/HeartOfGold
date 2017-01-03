@@ -1,0 +1,6 @@
+[submodule "HeartOfGold.MonoGame/GFSM"]
+	path = HeartOfGold.MonoGame/GFSM
+	url = https://github.com/Sidneys1/GFSM.git
+[submodule "HeartOfGold.MonoGame/Behaviorals"]
+	path = HeartOfGold.MonoGame/Behaviorals
+	url = https://github.com/Sidneys1/Behaviorals.git

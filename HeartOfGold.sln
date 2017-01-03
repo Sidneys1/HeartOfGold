@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartOfGold.NBT", "HeartOfGold.NBT\HeartOfGold.NBT.csproj", "{8FDCD756-920C-4294-92A4-6984D7361E0C}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartOfGold.Engine", "HeartOfGold.Engine\HeartOfGold.Engine.csproj", "{C7ED89B8-CF45-415F-9982-F206A0F16B9B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartOfGold.MonoGame", "HeartOfGold.MonoGame\HeartOfGold.MonoGame.csproj", "{20E393A9-0121-42E2-9180-1A91F99758C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GFSM", "HeartOfGold.MonoGame\GFSM\GFSM\GFSM.csproj", "{1449297B-2145-4452-9C08-79E02D532DD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behaviorals", "HeartOfGold.MonoGame\Behaviorals\Behaviorals\Behaviorals.csproj", "{673A719C-DE08-47A2-B28D-A13B02B44A90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,22 @@ Global
 		{20E393A9-0121-42E2-9180-1A91F99758C5}.Release|Any CPU.ActiveCfg = Release|x86
 		{20E393A9-0121-42E2-9180-1A91F99758C5}.Release|x86.ActiveCfg = Release|x86
 		{20E393A9-0121-42E2-9180-1A91F99758C5}.Release|x86.Build.0 = Release|x86
+		{1449297B-2145-4452-9C08-79E02D532DD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1449297B-2145-4452-9C08-79E02D532DD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1449297B-2145-4452-9C08-79E02D532DD0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1449297B-2145-4452-9C08-79E02D532DD0}.Debug|x86.Build.0 = Debug|Any CPU
+		{1449297B-2145-4452-9C08-79E02D532DD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1449297B-2145-4452-9C08-79E02D532DD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1449297B-2145-4452-9C08-79E02D532DD0}.Release|x86.ActiveCfg = Release|Any CPU
+		{1449297B-2145-4452-9C08-79E02D532DD0}.Release|x86.Build.0 = Release|Any CPU
+		{673A719C-DE08-47A2-B28D-A13B02B44A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{673A719C-DE08-47A2-B28D-A13B02B44A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{673A719C-DE08-47A2-B28D-A13B02B44A90}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{673A719C-DE08-47A2-B28D-A13B02B44A90}.Debug|x86.Build.0 = Debug|Any CPU
+		{673A719C-DE08-47A2-B28D-A13B02B44A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{673A719C-DE08-47A2-B28D-A13B02B44A90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{673A719C-DE08-47A2-B28D-A13B02B44A90}.Release|x86.ActiveCfg = Release|Any CPU
+		{673A719C-DE08-47A2-B28D-A13B02B44A90}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

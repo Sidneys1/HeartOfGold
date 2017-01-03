@@ -21,7 +21,7 @@ namespace HeartOfGold.GUI {
 			using (var game = new GameWindow(1920, 1080, new GraphicsMode(ColorFormat.Empty, 8, 0, 6), "Heart of Gold", GameWindowFlags.Default)) {
 				
 				game.Icon = Icon.ExtractAssociatedIcon(Assembly.GetEntryAssembly().Location);
-				var size = 2048;
+				var size = 500;
 				var zoom = 1.0;
 				game.Load += (sender, e) => { game.VSync = VSyncMode.On;
 					GL.PointSize(10);
@@ -37,7 +37,7 @@ namespace HeartOfGold.GUI {
 
 					if (zoom <= 0.1) zoom = 0.1;
 
-					var aspect = game.Width / (double)game.Height;
+					//var aspect = game.Width / (double)game.Height;
 
 					//GL.Viewport(0, 0, game.Width, game.Height);
 					//GL.Ortho(-xsize, xsize, ysize, -ysize, 0, 4.0);
@@ -48,7 +48,7 @@ namespace HeartOfGold.GUI {
 				#region Heights
 
 				var matrix = new double[size, size];
-				var r = new Random();
+				//var r = new Random();
 
 				#endregion
 
@@ -74,62 +74,62 @@ namespace HeartOfGold.GUI {
 					 aDown = false,
 					 sDown = false,
 					 dDown = false;
-				game.KeyDown += delegate(object sender, KeyboardKeyEventArgs args) {
-					switch (args.Key) {
-						case Key.W:
-							wDown = true;
-							break;
-						case Key.A:
-							aDown = true;
-							break;
-						case Key.S:
-							sDown = true;
-							break;
-						case Key.D:
-							dDown = true;
-							break;
-					}
+				game.KeyDown += (sender, args) => {
+				    switch (args.Key) {
+				        case Key.W:
+				            wDown = true;
+				            break;
+				        case Key.A:
+				            aDown = true;
+				            break;
+				        case Key.S:
+				            sDown = true;
+				            break;
+				        case Key.D:
+				            dDown = true;
+				            break;
+				    }
 				};
-				Vector2 translate = Vector2.Zero;
-				game.KeyUp += delegate(object sender, KeyboardKeyEventArgs args) {
-					switch (args.Key) {
-						case Key.Escape:
-							game.Exit();
-							break;
-						case Key.R:
-							zoom = 1;
-							break;
-						case Key.W:
-							if (wDown)
-								translate += new Vector2(1f, 1f);
-							wDown = false;
-							break;
-						case Key.A:
-							if (aDown)
-								translate += new Vector2(1f, -1f);
-							aDown = false;
-							break;
-						case Key.S:
-							if (sDown)
-								translate += new Vector2(-1f, -1f);
-							sDown = false;
-							break;
-						case Key.D:
-							if (dDown)
-								translate += new Vector2(-1f, 1f);
-							dDown = false;
-							break;
-					}
+				var translate = Vector2.Zero;
+				game.KeyUp += (sender, args) => {
+				    switch (args.Key) {
+				        case Key.Escape:
+				            game.Exit();
+				            break;
+				        case Key.R:
+				            zoom = 1;
+				            break;
+				        case Key.W:
+				            if (wDown)
+				                translate += new Vector2(1f, 1f);
+				            wDown = false;
+				            break;
+				        case Key.A:
+				            if (aDown)
+				                translate += new Vector2(1f, -1f);
+				            aDown = false;
+				            break;
+				        case Key.S:
+				            if (sDown)
+				                translate += new Vector2(-1f, -1f);
+				            sDown = false;
+				            break;
+				        case Key.D:
+				            if (dDown)
+				                translate += new Vector2(-1f, 1f);
+				            dDown = false;
+				            break;
+				    }
 				};
 
 				double time=0, sin = 0;
 
 				game.UpdateFrame +=
-					delegate(object sender, FrameEventArgs e) {
-						time += e.Time;
-						sin = (Math.Sin(time/4) + 1) / 2;
-						game.Title = $"Heart of Gold - {game.RenderFrequency:000.00}fps - {game.UpdateFrequency:000.00}tps";
-					};
+				    (sender, e) => {
+				        time += e.Time;
+				        sin = (Math.Sin(time/4) + 1)/2;
+				        game.Title = $"Heart of Gold - {game.RenderFrequency:000.00}fps - {game.UpdateFrequency:000.00}tps";
+				    };
 
 				var items = new List<BufferElement>(size * size * 12);
 				Console.WriteLine("Prepping buffer elements...");
