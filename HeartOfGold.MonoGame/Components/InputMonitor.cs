@@ -16,6 +16,8 @@ namespace HeartOfGold.MonoGame.Components {
         public bool IsMiddleMouseDown { get; private set; }
         public bool IsRightMouseDown { get; private set; }
 
+        public int ScrollWheel { get; private set; }
+
         public Vector2 MousePosition { get; private set; }
 
         public event Action<Keys> KeyPressed;
@@ -61,6 +63,8 @@ namespace HeartOfGold.MonoGame.Components {
                 IsMiddleMouseDown = true;
                 MiddleMouseDown?.Invoke(mousestate);
             }
+
+            ScrollWheel = mousestate.ScrollWheelValue;
 
             var releasedKeys = _keyStates.Where(k => k.Value && keystate.IsKeyUp(k.Key)).Select(k => k.Key).ToArray();
             foreach (var releasedKey in releasedKeys) {

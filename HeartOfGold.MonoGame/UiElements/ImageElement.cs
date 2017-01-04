@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace HeartOfGold.MonoGame.UiElements {
-    internal class ImageElement : UiComponent.UiElement {
+    internal class ImageElement : UiElement {
         private readonly Texture2D _texture;
         //public new Vector2 Scale { get; set; }
         public string Text { get; set; }

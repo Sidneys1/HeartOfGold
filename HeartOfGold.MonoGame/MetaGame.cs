@@ -1,5 +1,6 @@
 ﻿using GFSM;
 using HeartOfGold.MonoGame.States;
+using HeartOfGold.MonoGame.States.Game;
 using HeartOfGold.MonoGame.States.Intros;
 using HeartOfGold.MonoGame.States.Menus;
 
@@ -10,6 +11,9 @@ namespace HeartOfGold.MonoGame {
         static MetaGame() {
             var mainMenuState = new MainMenuState(StateMachine, MainGame.Instance);
             StateMachine.States.Add(mainMenuState);
+
+            var mainGameState = new MainGameState(StateMachine, MainGame.Instance);
+            StateMachine.States.Add(mainGameState);
 
             if (Program.SkipIntro)
                 StateMachine.AddTransition(new Transition<GameState>("start", null, mainMenuState));
@@ -24,6 +28,8 @@ namespace HeartOfGold.MonoGame {
                     Mode.PushPop));
                 StateMachine.AddTransition(new Transition<GameState>("next", titleState, mainMenuState, Mode.PushPop));
             }
+
+            StateMachine.AddTransition(new Transition<GameState>("start", mainMenuState, mainGameState, Mode.PushPop));
 
             StateMachine.AddTransition(new Transition<GameState>("exit", mainMenuState, null));
         }

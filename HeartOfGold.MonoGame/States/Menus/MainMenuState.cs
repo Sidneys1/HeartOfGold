@@ -29,60 +29,71 @@ namespace HeartOfGold.MonoGame.States.Menus {
         }
 
         public override void Enter() {
-            var floatBehavior = new Behaviour<UiComponent.UiElement>(element => element.Offset = _offset*((float)element.AttachedProperties["floatiness"]*50));
-
             _content.LoadContent();
 
             Game.Components.Add(_ui);
+            this.AddFloatBehavior();
 
-            var logo = new ImageElement(_ui, _content.Textures["logo"]) {
-                Position = new Vector2(150, 150),
-                Origin = new Vector2(64,64)
-            };
-            _ui.UiElements.Add(logo);
-            logo.AttachedProperties.Add("floatiness", 0.5f);
-            logo.Behaviours.Add(UiElementBehaviorTriggers.MouseMove.I(), floatBehavior);
+            _ui.UiElements.Add(
+                new ImageElement(_ui, _content.Textures["map"]) {
+                    Position = _mapPos
+                }.AddFloatBehavior(0.1f)
+            );
 
-            var titleText = new TextElement(_ui, _content.Fonts["title"]) {
-                Position = new Vector2(250, 150 - _content.Fonts["title"].MeasureString("Heart of Gold").Y / 2f),
-                Color = Color.Gold,
-                HoverColor = Color.Gold,
-                Text = "Heart of Gold"
-            };
-            _ui.UiElements.Add(titleText);
-            titleText.AttachedProperties.Add("floatiness", 0.5f);
-            titleText.Behaviours.Add(UiElementBehaviorTriggers.MouseMove.I(), floatBehavior);
+            _ui.UiElements.Add(
+                new ImageElement(_ui, _content.Textures["clouds"]) {
+                    Position = _mapPos
+                }.AddFloatBehavior(0.25f)
+            );
 
-            var startText = new TextElement(_ui, _content.Fonts["menu"]) {
+            _ui.UiElements.Add(
+                new ImageElement(_ui, _content.Textures["logo"]) {
+                    Position = new Vector2(150, 150),
+                    Origin = new Vector2(64, 64)
+                }.AddFloatBehavior(0.5f)
+            );
+            
+            _ui.UiElements.Add(
+                new TextElement(_ui, _content.Fonts["title"]) {
+                    Position = new Vector2(250, 150 - _content.Fonts["title"].MeasureString("Heart of Gold").Y / 2f),
+                    Color = Color.Gold,
+                    HoverColor = Color.Gold,
+                    Text = "Heart of Gold"
+                }.AddFloatBehavior(0.5f)
+            );
+
+            var startButton = new TextElement(_ui, _content.Fonts["menu"]) {
                 Position = new Vector2(250, 250),
                 Text = "Start"
-            };
-            _ui.UiElements.Add(startText);
-            startText.AttachedProperties.Add("floatiness", 0.75f);
-            startText.Behaviours.Add(UiElementBehaviorTriggers.MouseMove.I(), floatBehavior);
+            }.AddFloatBehavior(0.75f).AddFloatPopupBehavior(1f);
+            _ui.UiElements.Add(startButton);
+            startButton.MouseUp += StartRoutine;
 
-            startText.MouseEnter += () => startText.AttachedProperties["floatiness"] = 1f;
-            startText.MouseLeave += () => startText.AttachedProperties["floatiness"] = 0.75f;
+            var exitButton = new TextElement(_ui, _content.Fonts["menu"]) {
+                Position = new Vector2(250, 300),
+                Text = "Exit"
+            }.AddFloatBehavior(0.75f).AddFloatPopupBehavior(1f);
+            _ui.UiElements.Add(exitButton);
+            exitButton.MouseUp += () => MetaGame.StateMachine.Transition("exit");
+
             base.Enter();
         }
 
-        private Vector2 _offset;
+        private void StartRoutine() {
+            _content.UnloadContent();
+            Game.Components.Remove(_ui);
+            Game.Components.Remove(this);
+            MetaGame.StateMachine.Transition("start");
+        }
 
         public override void Update(GameTime time) {
             if (MainGame.InputMonitor.IsKeyPressed(Keys.Escape)) MetaGame.StateMachine.Transition("exit");
 
-            _offset = (MainGame.InputMonitor.MousePosition / new Vector2(MainGame.Instance.Window?.ClientBounds.Width??1, MainGame.Instance.Window?.ClientBounds.Height??1)) - new Vector2(0.5f, 0.5f);
+            base.Update(time);
         }
 
         public override void Draw(GameTime time) {
             MainGame.Instance.GraphicsDevice.Clear(Color.Black);
-
-            _sb.Begin();
-            {
-                _sb.Draw(_content.Textures["map"], _mapPos + _offset * 10, Color.White);
-                _sb.Draw(_content.Textures["clouds"], _mapPos + _offset * 20, Color.White);
-            }
-            _sb.End();
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace HeartOfGold.MonoGame.UiElements {
 
 
-    internal class TextElement : UiComponent.UiElement {
+    internal class TextElement : UiElement {
         private readonly SpriteFont _font;
         private string _text;
 
@@ -22,7 +22,7 @@ namespace HeartOfGold.MonoGame.UiElements {
         }
         
         public override void Draw(GameTime gameTime) {
-            UiComponent.SpriteBatch.DrawString(_font, Text, Position + Offset, MouseOver ? HoverColor : Color, Rotation, Origin, Scale, Effects, 0);
+            UiComponent.SpriteBatch.DrawString(_font, Text, Position + Offset, IsMouseOver ? HoverColor : Color, Rotation, Origin, Scale, Effects, 0);
         }
     }
 }
